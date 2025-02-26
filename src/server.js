@@ -7,7 +7,17 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const googleAuthRoutes = require('./routes/googleAuthRoutes');
 const app = express();
 
-app.use(cors());
+// TODO: Add production origin
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api/google-auth', googleAuthRoutes);
